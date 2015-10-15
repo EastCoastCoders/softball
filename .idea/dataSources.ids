@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Softball" uuid="a0f0bdc7-e427-4257-ab89-f03c12dc63ea">
+    <database-info product="MySQL" version="5.6.24-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="softball"/>
+    <table name="admins" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="role" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="events" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="600" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="game_stats" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="players_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="position" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="at_bats" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="runs" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="hits" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="doubles" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="triples" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="home_runs" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="rbi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="walks" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="avg" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
+      <column name="on_base" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
+      <column name="slugging_percent" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="id,players_id"/>
+      <index name="fk_player_stats_players_idx" unique="false" columns="players_id"/>
+    </table>
+    <table name="players" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="first_name" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="bio" sqlType="VARCHAR" precision="600" scale="0" nullable="true" jdbcType="12"/>
+      <column name="number" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="polls" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="question" sqlType="VARCHAR" precision="600" scale="0" nullable="true" jdbcType="12"/>
+      <column name="yes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="no" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+  </data-source>
+</component>
