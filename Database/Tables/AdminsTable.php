@@ -159,6 +159,25 @@ Class AdminsTable extends Database
 
     }
 
+    public function fetchAllRows()
+    {
+        $query = "SELECT * FROM admins";
+        $result = mysqli_query($this->connection, $query);
+
+        $data = array();
+
+        while($row = mysqli_fetch_object($result))
+        {
+            $data[] = $row;
+
+
+        }
+
+    return $data;
+
+
+    }
+
     /**
      * @param AdminObject $AdminObject
      */

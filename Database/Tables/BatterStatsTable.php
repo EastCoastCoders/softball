@@ -1,7 +1,7 @@
 <?php
 
 
-class GameObject
+class BatterObject
 {
 
     private $id;
@@ -21,7 +21,7 @@ class GameObject
     private $sac_fly;
 
     /**
-     * GameObject constructor.
+     * BatterObject constructor.
      * @param $players_id
      * @param $position
      * @param $at_bats
@@ -312,7 +312,7 @@ class GameObject
 
 }
 
-Class GameStatsTable extends Database
+Class BatterStatsTable extends Database
 {
 
     /** Create Statement Variables **/
@@ -338,41 +338,41 @@ Class GameStatsTable extends Database
         parent::__construct();
 
         // prepare Create Statement
-        $this->createStatement = $this->connection->prepare("INSERT INTO game_stats(players_id, position, at_bats, runs, hits, doubles, triples, home_runs, rbi, walks, avg, on_base, slugging_percent, sac_fly) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $this->createStatement = $this->connection->prepare("INSERT INTO batter_stats(players_id, position, at_bats, runs, hits, doubles, triples, home_runs, rbi, walks, avg, on_base, slugging_percent, sac_fly) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $this->createStatement->bind_param("isiiiiiiiidddi", $this->players_id, $this->position, $this->at_bats, $this->runs, $this->hits, $this->doubles, $this->triples, $this->home_runs, $this->rbi, $this->walks, $this->avg, $this->on_base, $this->slugging_percent, $this->sac_fly);
 
         // prepare read statement
-        $this->readStatement = $this->connection->prepare("SELECT * FROM game_stats WHERE id = ?");
+        $this->readStatement = $this->connection->prepare("SELECT * FROM batter_stats WHERE id = ?");
         $this->readStatement->bind_param("i", $this->id);
 
         // prepare update statement
-        $this->updateStatement = $this->connection->prepare("UPDATE game_stats SET players_id = ?, position = ?, at_bats = ?, runs = ?, hits = ?, doubles = ?, triples = ?, home_runs = ?, rbi = ?, walks = ?, avg = ?, on_base = ?, slugging_percent = ?, sac_fly = ?");
+        $this->updateStatement = $this->connection->prepare("UPDATE batter_stats SET players_id = ?, position = ?, at_bats = ?, runs = ?, hits = ?, doubles = ?, triples = ?, home_runs = ?, rbi = ?, walks = ?, avg = ?, on_base = ?, slugging_percent = ?, sac_fly = ?");
         $this->updateStatement->bind_param("isiiiiiiiidddi", $this->players_id, $this->position, $this->at_bats, $this->runs, $this->hits, $this->doubles, $this->triples, $this->home_runs, $this->rbi, $this->walks, $this->avg, $this->on_base, $this->slugging_percent, $this->sac_fly);
 
         // prepare delete statement
-        $this->deleteStatement = $this->connection->prepare("DELETE FROM game_stats WHERE id = ?");
+        $this->deleteStatement = $this->connection->prepare("DELETE FROM batter_stats WHERE id = ?");
         $this->deleteStatement->bind_param("i", $this->id);
     }
 
     /**
-     * @param GameObject $gameObject
+     * @param BatterObject $BatterObject
      */
-    public function create($gameObject)
+    public function create($BatterObject)
     {
-        $this->players_id       = (int)parent::cleanData($gameObject->getPlayersId());
-        $this->position         = (int)parent::cleanData($gameObject->getPosition());
-        $this->at_bats          = (int)parent::cleanData($gameObject->getAtBats());
-        $this->runs             = (int)parent::cleanData($gameObject->getRuns());
-        $this->hits             = (int)parent::cleanData($gameObject->getHits());
-        $this->doubles          = (int)parent::cleanData($gameObject->getDoubles());
-        $this->triples          = (int)parent::cleanData($gameObject->getTriples());
-        $this->home_runs        = (int)parent::cleanData($gameObject->getHomeRuns());
-        $this->rbi              = (int)parent::cleanData($gameObject->getRbi());
-        $this->walks            = (int)parent::cleanData($gameObject->getWalks());
-        $this->avg              = (double)$gameObject->getAvg();
-        $this->on_base          = (double)$gameObject->getOnBase();
-        $this->slugging_percent = (double)$gameObject->getSluggingPercent();
-        $this->sac_fly          = (int)parent::cleanData($gameObject->getSacFly());
+        $this->players_id       = (int)parent::cleanData($BatterObject->getPlayersId());
+        $this->position         = (int)parent::cleanData($BatterObject->getPosition());
+        $this->at_bats          = (int)parent::cleanData($BatterObject->getAtBats());
+        $this->runs             = (int)parent::cleanData($BatterObject->getRuns());
+        $this->hits             = (int)parent::cleanData($BatterObject->getHits());
+        $this->doubles          = (int)parent::cleanData($BatterObject->getDoubles());
+        $this->triples          = (int)parent::cleanData($BatterObject->getTriples());
+        $this->home_runs        = (int)parent::cleanData($BatterObject->getHomeRuns());
+        $this->rbi              = (int)parent::cleanData($BatterObject->getRbi());
+        $this->walks            = (int)parent::cleanData($BatterObject->getWalks());
+        $this->avg              = (double)$BatterObject->getAvg();
+        $this->on_base          = (double)$BatterObject->getOnBase();
+        $this->slugging_percent = (double)$BatterObject->getSluggingPercent();
+        $this->sac_fly          = (int)parent::cleanData($BatterObject->getSacFly());
 
         $this->createStatement->execute();
 
@@ -385,51 +385,52 @@ Class GameStatsTable extends Database
         $this->readStatement->execute();
 
         $result = $this->readStatement->get_result();
-        $game   = new GameObject();
+        $batter   = new BatterObject();
 
         while ($row = $result->fetch_object()) {
 
-            $game->setPlayersId($row->players_id);
-            $game->setPosition($row->position);
-            $game->setAtBats($row->at_bats);
-            $game->setRuns($row->runs);
-            $game->setHits($row->hits);
-            $game->setDoubles($row->doubles);
-            $game->setTriples($row->triples);
-            $game->setHomeRuns($row->home_runs);
-            $game->setRbi($row->rbi);
-            $game->setWalks($row->walks);
-            $game->setAvg($row->avg);
-            $game->setOnBase($row->on_base);
-            $game->setSluggingPercent($row->slugging_percent);
-            $game->setSacFly($row->sac_fly);
+            $batter->setPlayersId($row->players_id);
+            $batter->setPosition($row->position);
+            $batter->setAtBats($row->at_bats);
+            $batter->setRuns($row->runs);
+            $batter->setHits($row->hits);
+            $batter->setDoubles($row->doubles);
+            $batter->setTriples($row->triples);
+            $batter->setHomeRuns($row->home_runs);
+            $batter->setRbi($row->rbi);
+            $batter->setWalks($row->walks);
+            $batter->setAvg($row->avg);
+            $batter->setOnBase($row->on_base);
+            $batter->setSluggingPercent($row->slugging_percent);
+            $batter->setSacFly($row->sac_fly);
         }
 
-        return $game;
+        return $batter;
 
     }
 
     /**
-     * @param GameObject $gameObject
+     * @param BatterObject $BatterObject
      */
-    public function update($gameObject)
+    public function update($BatterObject)
     {
-        $oldData = $this->read($gameObject->getId());
+        $oldData = $this->read($BatterObject->getId());
 
-        $this->players_id = ($gameObject->getPlayersId() !== null) ? parent::cleanData($gameObject->getPlayersId()) : $oldData->getPlayersId();
-        $this->position   = ($gameObject->getPosition() !== null) ? parent::cleanData($gameObject->getPosition()) : $oldData->getPosition();
-        $this->at_bats    = ($gameObject->getAtBats() !== null) ? parent::cleanData($gameObject->getAtBats()) : $oldData->getAtBats();
+        $this->players_id = ($BatterObject->getPlayersId() !== null) ? parent::cleanData($BatterObject->getPlayersId()) : $oldData->getPlayersId();
+        $this->position   = ($BatterObject->getPosition() !== null) ? parent::cleanData($BatterObject->getPosition()) : $oldData->getPosition();
+        $this->at_bats    = ($BatterObject->getAtBats() !== null) ? parent::cleanData($BatterObject->getAtBats()) : $oldData->getAtBats();
 
-        $this->runs    = ($gameObject->getRuns() !== null) ? parent::cleanData($gameObject->getRuns()) : $oldData->getRuns();
-        $this->hits    = ($gameObject->getHits() !== null) ? parent::cleanData($gameObject->getHits()) : $oldData->getHits();
-        $this->doubles = ($gameObject->getDoubles() !== null) ? parent::cleanData($gameObject->getDoubles()) : $oldData->getDoubles();
+        $this->runs    = ($BatterObject->getRuns() !== null) ? parent::cleanData($BatterObject->getRuns()) : $oldData->getRuns();
+        $this->hits    = ($BatterObject->getHits() !== null) ? parent::cleanData($BatterObject->getHits()) : $oldData->getHits();
+        $this->doubles = ($BatterObject->getDoubles() !== null) ? parent::cleanData($BatterObject->getDoubles()) : $oldData->getDoubles();
+        $this->triples   = ($BatterObject->getTriples() !== null) ? parent::cleanData($BatterObject->getTriples()) : $oldData->getTriples();
 
-        $this->triples   = ($gameObject->getTriples() !== null) ? parent::cleanData($gameObject->getTriples()) : $oldData->getTriples();
-        $this->home_runs = ($gameObject->getHomeRuns() !== null) ? parent::cleanData($gameObject->getHomeRuns()) : $oldData->getHomeRuns();
-        $this->rbi       = ($gameObject->getRbi() !== null) ? parent::cleanData($gameObject->getRbi()) : $oldData->getRbi();
-        $this->walks     = ($gameObject->getWalks() !== null) ? parent::cleanData($gameObject->getWalks()) : $oldData->getWalks();
-        $this->sac_fly   = ($gameObject->getSacFly() !== null) ? parent::cleanData($gameObject->getSacFly()) : $oldData->getSacFly();
+        $this->home_runs = ($BatterObject->getHomeRuns() !== null) ? parent::cleanData($BatterObject->getHomeRuns()) : $oldData->getHomeRuns();
+        $this->rbi       = ($BatterObject->getRbi() !== null) ? parent::cleanData($BatterObject->getRbi()) : $oldData->getRbi();
+        $this->walks     = ($BatterObject->getWalks() !== null) ? parent::cleanData($BatterObject->getWalks()) : $oldData->getWalks();
+        $this->sac_fly   = ($BatterObject->getSacFly() !== null) ? parent::cleanData($BatterObject->getSacFly()) : $oldData->getSacFly();
 
+        $this->updateStatement->execute();
 
     }
 

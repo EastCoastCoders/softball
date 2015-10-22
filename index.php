@@ -8,29 +8,27 @@
 
     include "Database/db.php";
     include "Database/Tables/PlayersTable.php";
-    include "Database/Tables/GameStatsTable.php";
+    include "Database/Tables/BatterStatsTable.php";
     include "Database/Tables/PollsTable.php";
     include "Database/Tables/AdminsTable.php";
     include "Database/Tables/EventsTable.php";
+    include "Database/Tables/PitcherStatsTable.php";
 
-    $gameTable = new GameStatsTable();
-    $gameObject = new GameObject();
+    $pitcherTable = new PitcherStatsTable();
+    $pitcherObject = new PitcherObject();
 
-    $gameObject->setPlayersId(3);
-    $gameObject->setPosition("1B");
-    $gameObject->setAtBats(25);
-    $gameObject->setRuns(16);
-    $gameObject->setHits(18);
-    $gameObject->setDoubles(7);
-    $gameObject->setTriples(3);
-    $gameObject->setHomeRuns(6);
-    $gameObject->setRbi(29);
-    $gameObject->setWalks(10);
-    $gameObject->setSacFly(3);
+    $pitcherObject->setWin(3);
+    $pitcherObject->setLoss(2);
+    $pitcherObject->setInningsPitched(22);
+    $pitcherObject->setRunsAllowed(12);
+    $pitcherObject->setEarnedRunsAllowed(10);
+    $pitcherObject->setWalksAllowed(4);
+    $pitcherObject->setAvgOfBatters(.123);
+    $pitcherObject->setStrikeOuts(12);
 
-    $gameObject->calcPercents();
+    $pitcherObject->calcEra();
 
-    $gameTable->create($gameObject);
+    $pitcherTable->create($pitcherObject);
 
 
     /*$eventsTable = new EventsTable();
@@ -43,8 +41,4 @@
 
     $eventsTable->create($eventsObject);
     */
-
-
-//    Daniel is really dumb
-
 
