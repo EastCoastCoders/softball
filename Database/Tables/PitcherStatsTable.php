@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Greg
+ * User: Gregory
  * Date: 10/21/2015
  * Time: 9:38 PM
  */
@@ -219,7 +219,7 @@ class PitcherObject
 Class PitcherStatsTable extends Database
 {
 
-    /** Create Statement Variables **/
+    /** Create Statement Variables  **/
 
     private $id;
     private $players_id;
