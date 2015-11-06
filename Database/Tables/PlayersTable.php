@@ -3,8 +3,8 @@
 
 /**
  * Created by PhpStorm.
- * User: Daniel
- * Date: 08/10/2015
+ * User: Greg
+ * Date: 10/12/2015
  * Time: 11:04 PM
  */
 class PlayerObject
