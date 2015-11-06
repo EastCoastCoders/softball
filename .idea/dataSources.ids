@@ -14,15 +14,7 @@
       <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="events" schema="" catalog="softball" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
-      <column name="description" sqlType="VARCHAR" precision="600" scale="0" nullable="true" jdbcType="12"/>
-      <column name="date" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
-      <column name="image" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="game_stats" schema="" catalog="softball" type="TABLE">
+    <table name="batter_stats" schema="" catalog="softball" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="players_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="position" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
@@ -34,12 +26,35 @@
       <column name="home_runs" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="rbi" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="walks" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="avg" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="on_base" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
-      <column name="slugging_percent" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
+      <column name="avg" sqlType="DECIMAL" precision="6" scale="3" nullable="true" jdbcType="3"/>
+      <column name="on_base" sqlType="DECIMAL" precision="6" scale="3" nullable="true" jdbcType="3"/>
+      <column name="slugging_percent" sqlType="DECIMAL" precision="6" scale="3" nullable="true" jdbcType="3"/>
       <column name="sac_fly" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id,players_id"/>
       <index name="fk_player_stats_players_idx" unique="false" columns="players_id"/>
+    </table>
+    <table name="events" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="600" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="image" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="pitcher_stats" schema="" catalog="softball" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="win" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="loss" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="era" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
+      <column name="innings_pitched" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="runs_allowed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="earned_runs_allowed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="walks_allowed" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="avg_of_batters" sqlType="DECIMAL" precision="10" scale="0" nullable="true" jdbcType="3"/>
+      <column name="strike_outs" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="players_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id,players_id"/>
+      <index name="fk_pitcher_stats_players_idx" unique="false" columns="players_id"/>
     </table>
     <table name="players" schema="" catalog="softball" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

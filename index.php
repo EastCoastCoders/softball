@@ -23,7 +23,6 @@
     $pitcherObject->setRunsAllowed(12);
     $pitcherObject->setEarnedRunsAllowed(10);
     $pitcherObject->setWalksAllowed(4);
-    $pitcherObject->setAvgOfBatters(.123);
     $pitcherObject->setStrikeOuts(12);
 
     $pitcherObject->calcEra();
